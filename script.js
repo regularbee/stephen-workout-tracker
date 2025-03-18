@@ -43,32 +43,35 @@ function updateTable(exerciseFilter, exercises) {
         const rpeCell = row.insertCell(2);
         const weightUsedCell = row.insertCell(3);
         const sessionCell = row.insertCell(4);
-        const calculateCell = row.insertCell(5);
 
         exerciseCell.textContent = exercise.Exercise;
         setsRepsCell.textContent = exercise['Sets x Reps'];
         rpeCell.textContent = exercise.RPE;
         weightUsedCell.innerHTML = `<input type="number" class="weight-input" id="weight-${exercise.Exercise}" placeholder="Enter weight" />`;
-        sessionCell.innerHTML = `<input type="text" class="session-input" id="session-${exercise.Exercise}" placeholder="Session #" />`;
-        calculateCell.innerHTML = `<button onclick="calculateWeight('${exercise.Exercise}')">Calculate</button>`;
+        sessionCell.innerHTML = `<span class="session-output" id="session-${exercise.Exercise}">5%: 0 | 10%: 0</span>`;
+
+        // Add event listener to the weight input to calculate the percentages when the user enters a value
+        const weightInput = document.getElementById(`weight-${exercise.Exercise}`);
+        weightInput.addEventListener('input', function() {
+            calculateWeight(exercise.Exercise);
+        });
     });
 }
 
-// Function to calculate weight increase
+// Function to calculate weight increase automatically when weight is entered
 function calculateWeight(exerciseName) {
     const weightInput = document.getElementById(`weight-${exerciseName}`);
-    const sessionInput = document.getElementById(`session-${exerciseName}`);
+    const sessionOutput = document.getElementById(`session-${exerciseName}`);
 
-    if (!weightInput || !sessionInput) {
-        console.error(`Weight input or session input for ${exerciseName} not found!`);
+    if (!weightInput || !sessionOutput) {
+        console.error(`Weight input or session output for ${exerciseName} not found!`);
         return;
     }
 
     const weight = parseFloat(weightInput.value);
-    const session = parseInt(sessionInput.value);
 
-    if (isNaN(weight) || isNaN(session)) {
-        alert('Please enter valid numbers for weight and session.');
+    if (isNaN(weight)) {
+        sessionOutput.textContent = '5%: 0 | 10%: 0'; // Reset if the value is invalid
         return;
     }
 
@@ -76,17 +79,13 @@ function calculateWeight(exerciseName) {
     const fivePercentIncrease = weight * 1.05;
     const tenPercentIncrease = weight * 1.10;
 
-    // Display the results in the session input
-    sessionInput.value = `5%: ${fivePercentIncrease.toFixed(1)} | 10%: ${tenPercentIncrease.toFixed(1)}`;
+    // Display the results in the session output field
+    sessionOutput.textContent = `5%: ${fivePercentIncrease.toFixed(1)} | 10%: ${tenPercentIncrease.toFixed(1)}`;
 }
-
-// Load CSV data on page load
-window.onload = loadCSVData;
-
 
 // Function to load and display workout data from the CSV file
 function loadWorkoutData() {
-    Papa.parse('workout_data_stephen.csv', {
+    Papa.parse('workout-data_stephen.csv', {
         download: true,
         header: true, // Treats the first row as headers
         dynamicTyping: true,
@@ -111,18 +110,13 @@ function displayWorkoutTable(workoutData) {
             <td>${exercise.RPE || 'N/A'}</td>
             <td>${exercise['Weight Used (lbs)']}</td>
             <td>${exercise.Session}</td> <!-- Display the session -->
-            <td><button onclick="calculateWeight(${exercise['Weight Used (lbs)']})">Calculate</button></td>
         `;
         
         tableBody.appendChild(row);
     });
 }
 
-
-
-// Call loadWorkoutData() when the page loads
-window.onload = loadWorkoutData;
-
+// Create the weight chart when the page loads
 let weightChart; // Global variable for the chart
 
 function createWeightChart(weightData) {
@@ -165,62 +159,5 @@ const exampleData = {
 // Create the chart when the page loads
 window.onload = function() {
     loadWorkoutData();
-
-
-Papa.parse('workout_data_stephen.csv', {
-    download: true,
-    header: true,
-    dynamicTyping: true,
-    complete: function(results) {
-        const workoutData = results.data;
-
-        // Populate the exercise dropdown
-        const exerciseSelect = document.getElementById('exercise-select');
-        const exercises = [...new Set(workoutData.map(ex => ex.Exercise))];  // Get unique exercises
-
-        exercises.forEach(exercise => {
-            const option = document.createElement('option');
-            option.value = exercise;
-            option.textContent = exercise;
-            exerciseSelect.appendChild(option);
-        });
-
-        // Display workout data in the table
-        displayWorkoutTable(workoutData);
-
-        // Filter data based on the selected exercise
-        exerciseSelect.addEventListener('change', function() {
-            const selectedExercise = exerciseSelect.value;
-            const filteredData = selectedExercise ? workoutData.filter(ex => ex.Exercise === selectedExercise) : workoutData;
-            displayWorkoutTable(filteredData);
-        });
-    }
-});
-
-function displayWorkoutTable(workoutData) {
-    const tableBody = document.querySelector('#workout-table tbody');
-    
-    // Clear existing rows
-    tableBody.innerHTML = '';
-
-    workoutData.forEach(exercise => {
-        const row = document.createElement('tr');
-
-        row.innerHTML = `
-            <td>${exercise.Exercise}</td>
-            <td>${exercise['Sets x Reps'] || 'N/A'}</td>
-            <td>${exercise.RPE || 'N/A'}</td>
-            <td>${exercise['Weight Used (lbs)']}</td>
-            <td>${exercise.Session}</td> <!-- Display the session -->
-            <td><button onclick="calculateWeight(${exercise['Weight Used (lbs)']})">Calculate</button></td>
-        `;
-        
-        tableBody.appendChild(row);
-    });
-}
-
-
-
     createWeightChart(exampleData); // You can replace exampleData with real data
 };
-
