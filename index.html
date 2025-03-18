@@ -13,7 +13,41 @@
 
     <section id="workout-schedule">
         <h2>Full-Body Workout Plan</h2>
-        <!-- Workout data will go here -->
+<section id="workout-schedule">
+    <h2>Full-Body Workout Plan</h2>
+
+    <!-- Workout Table -->
+    <table id="workout-table">
+        <thead>
+            <tr>
+                <th>Exercise</th>
+                <th>Sets x Reps</th>
+                <th>RPE</th>
+                <th>Weight Used</th>
+                <th>Calculate +5% / +10%</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Day 1 Example -->
+            <tr>
+                <td>Barbell Bench Press</td>
+                <td>4x6</td>
+                <td>8</td>
+                <td><input type="number" id="bench-weight" placeholder="Enter weight" /></td>
+                <td><button onclick="calculateWeight('bench')">Calculate</button></td>
+            </tr>
+            <tr>
+                <td>Pull-Ups</td>
+                <td>4x6-8</td>
+                <td>8</td>
+                <td><input type="number" id="pullup-weight" placeholder="Enter weight" /></td>
+                <td><button onclick="calculateWeight('pullup')">Calculate</button></td>
+            </tr>
+            <!-- Add more exercises here similarly -->
+        </tbody>
+    </table>
+</section>
+
     </section>
 
     <footer>
