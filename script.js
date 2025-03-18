@@ -52,3 +52,49 @@ function displayWorkoutTable(workoutData) {
 
 // Call loadWorkoutData() when the page loads
 window.onload = loadWorkoutData;
+
+let weightChart; // Global variable for the chart
+
+function createWeightChart(weightData) {
+    const ctx = document.getElementById('weightChart').getContext('2d');
+    
+    // If the chart already exists, destroy it and create a new one
+    if (weightChart) {
+        weightChart.destroy();
+    }
+    
+    weightChart = new Chart(ctx, {
+        type: 'line', // Line chart for tracking weight over time
+        data: {
+            labels: weightData.dates, // Dates of the workout sessions
+            datasets: [{
+                label: 'Weight Used (lbs)',
+                data: weightData.weights, // The weights used for each session
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                fill: false,
+                lineTension: 0.1
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+}
+
+// Example of data to use for the graph
+const exampleData = {
+    dates: ['Session 1', 'Session 2', 'Session 3', 'Session 4'],
+    weights: [150, 155, 160, 165]
+};
+
+// Create the chart when the page loads
+window.onload = function() {
+    loadWorkoutData();
+    createWeightChart(exampleData); // You can replace exampleData with real data
+};
+
