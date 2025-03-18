@@ -100,15 +100,16 @@ window.onload = function() {
     loadWorkoutData();
 
 
-Papa.parse('workout_data.csv', {
+Papa.parse('workout_data_stephen.csv', {
     download: true,
     header: true,
     dynamicTyping: true,
     complete: function(results) {
-        console.log(results.data);  // Check the parsed data
-        displayWorkoutTable(results.data);  // Process the CSV data
+        console.log("Parsed Data: ", results.data);  // Log the raw parsed data
+        displayWorkoutTable(results.data);  // Now process the data to display
     }
 });
+
     createWeightChart(exampleData); // You can replace exampleData with real data
 };
 
