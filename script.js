@@ -95,6 +95,17 @@ const exampleData = {
 // Create the chart when the page loads
 window.onload = function() {
     loadWorkoutData();
+
+
+Papa.parse('workout_data.csv', {
+    download: true,
+    header: true,
+    dynamicTyping: true,
+    complete: function(results) {
+        console.log(results.data);  // Check the parsed data
+        displayWorkoutTable(results.data);  // Process the CSV data
+    }
+});
     createWeightChart(exampleData); // You can replace exampleData with real data
 };
 
