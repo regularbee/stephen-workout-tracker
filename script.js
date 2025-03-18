@@ -159,3 +159,87 @@ function displayWorkoutTable(workoutData) {
     createWeightChart(exampleData); // You can replace exampleData with real data
 };
 
+// Function to load the CSV data and display it in the table
+function loadCSVData() {
+    Papa.parse('workout-data_stephen.csv', {
+        download: true,
+        header: true,
+        dynamicTyping: true,
+        complete: function(results) {
+            console.log(results);
+            const exercises = results.data;
+
+            // Populate the dropdown with exercise names
+            const exerciseSelect = document.getElementById('exercise-select');
+            exercises.forEach(exercise => {
+                let option = document.createElement('option');
+                option.value = exercise.Exercise;
+                option.textContent = exercise.Exercise;
+                exerciseSelect.appendChild(option);
+            });
+
+            // Handle the change of exercise selection
+            exerciseSelect.addEventListener('change', function() {
+                updateTable(exerciseSelect.value, exercises);
+            });
+
+            // Initially show all exercises
+            updateTable('', exercises);
+        }
+    });
+}
+
+// Function to update the table based on selected exercise
+function updateTable(exerciseFilter, exercises) {
+    const tableBody = document.getElementById('workout-table').getElementsByTagName('tbody')[0];
+    tableBody.innerHTML = ''; // Clear the table
+
+    exercises.filter(exercise => {
+        return !exerciseFilter || exercise.Exercise === exerciseFilter;
+    }).forEach(exercise => {
+        const row = tableBody.insertRow();
+
+        const exerciseCell = row.insertCell(0);
+        const setsRepsCell = row.insertCell(1);
+        const rpeCell = row.insertCell(2);
+        const weightUsedCell = row.insertCell(3);
+        const sessionCell = row.insertCell(4);
+        const calculateCell = row.insertCell(5);
+
+        exerciseCell.textContent = exercise.Exercise;
+        setsRepsCell.textContent = exercise['Sets x Reps'];
+        rpeCell.textContent = exercise.RPE;
+        weightUsedCell.innerHTML = `<input type="number" class="weight-input" id="weight-${exercise.Exercise}" placeholder="Enter weight" />`;
+        sessionCell.innerHTML = `<input type="text" class="session-input" id="session-${exercise.Exercise}" placeholder="Session #" />`;
+        calculateCell.innerHTML = `<button onclick="calculateWeight('${exercise.Exercise}')">Calculate</button>`;
+    });
+}
+
+// Function to calculate weight increase
+function calculateWeight(exerciseName) {
+    const weightInput = document.getElementById(`weight-${exerciseName}`);
+    const sessionInput = document.getElementById(`session-${exerciseName}`);
+
+    if (!weightInput || !sessionInput) {
+        console.error(`Weight input or session input for ${exerciseName} not found!`);
+        return;
+    }
+
+    const weight = parseFloat(weightInput.value);
+    const session = parseInt(sessionInput.value);
+
+    if (isNaN(weight) || isNaN(session)) {
+        alert('Please enter valid numbers for weight and session.');
+        return;
+    }
+
+    // Calculate 5% and 10% increments
+    const fivePercentIncrease = weight * 1.05;
+    const tenPercentIncrease = weight * 1.10;
+
+    // Display the results in the session input
+    sessionInput.value = `5%: ${fivePercentIncrease.toFixed(1)} | 10%: ${tenPercentIncrease.toFixed(1)}`;
+}
+
+// Load CSV data on page load
+window.onload = loadCSVData;
