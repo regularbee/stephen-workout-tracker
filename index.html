@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 </head>
 <body>
     <header>
@@ -16,49 +15,35 @@
 
     <section id="workout-schedule">
         <h2>Full-Body Workout Plan</h2>
-<section id="workout-schedule">
-    <h2>Full-Body Workout Plan</h2>
 
-    <!-- Workout Table -->
-    <table id="workout-table">
-        <thead>
-            <tr>
-                <th>Exercise</th>
-                <th>Sets x Reps</th>
-                <th>RPE</th>
-                <th>Weight Used</th>
-                <th>Calculate +5% / +10%</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Day 1 Example -->
-            <tr>
-                <td>Barbell Bench Press</td>
-                <td>4x6</td>
-                <td>8</td>
-                <td><input type="number" id="bench-weight" placeholder="Enter weight" /></td>
-                <td><button onclick="calculateWeight('bench')">Calculate</button></td>
-            </tr>
-            <tr>
-                <td>Pull-Ups</td>
-                <td>4x6-8</td>
-                <td>8</td>
-                <td><input type="number" id="pullup-weight" placeholder="Enter weight" /></td>
-                <td><button onclick="calculateWeight('pullup')">Calculate</button></td>
-            </tr>
-            <!-- Add more exercises here similarly -->
-        </tbody>
-    </table>
+        <!-- Exercise Selection Dropdown -->
+        <div>
+            <label for="exercise-select">Select Exercise: </label>
+            <select id="exercise-select">
+                <option value="">--Choose an Exercise--</option>
+            </select>
+        </div>
 
-     <!-- Table -->
-    <table id="workout-table">
-        <!-- Existing table code -->
-    </table>
+        <!-- Workout Table -->
+        <table id="workout-table">
+            <thead>
+                <tr>
+                    <th>Exercise</th>
+                    <th>Sets x Reps</th>
+                    <th>RPE</th>
+                    <th>Weight Used</th>
+                    <th>Session</th>
+                    <th>Calculate +5% / +10%</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Workout data rows will be added here dynamically -->
+            </tbody>
+        </table>
 
-    <!-- Graph for tracking weight used -->
-    <h3>Weight Used Tracking</h3>
-    <canvas id="weightChart" width="400" height="200"></canvas>
-</section>
+        <!-- Graph for tracking weight used -->
+        <h3>Weight Used Tracking</h3>
+        <canvas id="weightChart" width="400" height="200"></canvas>
 
     </section>
 
