@@ -42,15 +42,17 @@ function displayWorkoutTable(workoutData) {
 
         row.innerHTML = `
             <td>${exercise.Exercise}</td>
-            <td>${exercise['Sets x Reps']}</td> <!-- Directly using the range -->
-            <td>${exercise.RPE}</td>
-            <td><input type="number" value="${exercise['Weight Used (lbs)']}" class="weight-input" /></td>
+            <td>${exercise['Sets x Reps'] || 'N/A'}</td>
+            <td>${exercise.RPE || 'N/A'}</td>
+            <td>${exercise['Weight Used (lbs)']}</td>
+            <td>${exercise.Session}</td> <!-- Display the session -->
             <td><button onclick="calculateWeight(${exercise['Weight Used (lbs)']})">Calculate</button></td>
         `;
         
         tableBody.appendChild(row);
     });
 }
+
 
 
 // Call loadWorkoutData() when the page loads
