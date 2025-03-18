@@ -31,24 +31,27 @@ function loadWorkoutData() {
     });
 }
 
-// Function to display the parsed data in a table
 function displayWorkoutTable(workoutData) {
     const tableBody = document.querySelector('#workout-table tbody');
+    
+    // Clear existing rows
+    tableBody.innerHTML = '';
 
     workoutData.forEach(exercise => {
         const row = document.createElement('tr');
 
         row.innerHTML = `
             <td>${exercise.Exercise}</td>
-            <td>${exercise.Sets} x ${exercise.Reps}</td>
+            <td>${exercise['Sets x Reps']}</td> <!-- Directly using the range -->
             <td>${exercise.RPE}</td>
-            <td><input type="number" value="${exercise.WeightUsed}" class="weight-input" /></td>
-            <td><button onclick="calculateWeight(${exercise.WeightUsed})">Calculate</button></td>
+            <td><input type="number" value="${exercise['Weight Used (lbs)']}" class="weight-input" /></td>
+            <td><button onclick="calculateWeight(${exercise['Weight Used (lbs)']})">Calculate</button></td>
         `;
         
         tableBody.appendChild(row);
     });
 }
+
 
 // Call loadWorkoutData() when the page loads
 window.onload = loadWorkoutData;
