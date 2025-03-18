@@ -1,28 +1,28 @@
-Day,Exercise,Sets x Reps,RPE,Weight Used (lbs)
-Day 1,Barbell Bench Press,4 x 6-8,8,150
-Day 1,Pull-Ups,4 x 6-8,8,130
-Day 1,Dumbbell Shoulder Press,3 x 8-10,7,50
-Day 1,Dumbbell Row,4 x 8-10,7,70
-Day 1,Dumbbell Bicep Curl,3 x 10-12,7,30
-Day 1,Tricep Pushdowns,3 x 12-15,6,40
-Day 2,Barbell Squats,4 x 5-6,8,185
-Day 2,Leg Press,3 x 8-10,7,250
-Day 2,Walking Lunges,3 x 12 (each leg),7,40
-Day 2,Leg Curls (Machine),4 x 8-10,6,90
-Day 2,Leg Extensions,3 x 12-15,6,80
-Day 2,Calf Raises,4 x 15-20,8,100
-Day 3,Barbell Deadlift,4 x 5-6,9,225
-Day 3,Pull-Ups,4 x 6-8,8,130
-Day 3,Barbell Rows,4 x 6-8,8,135
-Day 3,Dumbbell Lateral Raise,3 x 12-15,6,15
-Day 3,Face Pulls (Cable),3 x 12-15,6,25
-Day 4,Barbell Overhead Press,4 x 5-6,8,100
-Day 4,Incline Dumbbell Press,3 x 8-10,7,60
-Day 4,Flat Dumbbell Chest Fly,3 x 8-10,7,35
-Day 4,Dumbbell Tricep Kickbacks,3 x 12-15,6,20
-Day 4,Plank,3 x 30-45 sec,7,N/A
-Day 5,Barbell Front Squat,3 x 5-6,8,135
-Day 5,Lunges,3 x 12 (each leg),7,40
-Day 5,Glute Bridges,3 x 12-15,7,N/A
-Day 5,Seated Calf Raises,4 x 15-20,8,80
-Day 5,Ab Rollouts,3 x 12-15,7,N/A
+Day,Exercise,Sets x Reps,RPE,Weight Used (lbs), Session
+Day 1,Barbell Bench Press,4 x 6-8,8,150,
+Day 1,Pull-Ups,4 x 6-8,8,130,
+Day 1,Dumbbell Shoulder Press,3 x 8-10,7,50,
+Day 1,Dumbbell Row,4 x 8-10,7,70,
+Day 1,Dumbbell Bicep Curl,3 x 10-12,7,30,
+Day 1,Tricep Pushdowns,3 x 12-15,6,40,
+Day 2,Barbell Squats,4 x 5-6,8,185,
+Day 2,Leg Press,3 x 8-10,7,250,
+Day 2,Walking Lunges,3 x 12 (each leg),7,40,
+Day 2,Leg Curls (Machine),4 x 8-10,6,90,
+Day 2,Leg Extensions,3 x 12-15,6,80,
+Day 2,Calf Raises,4 x 15-20,8,100,
+Day 3,Barbell Deadlift,4 x 5-6,9,225,
+Day 3,Pull-Ups,4 x 6-8,8,130,
+Day 3,Barbell Rows,4 x 6-8,8,135,
+Day 3,Dumbbell Lateral Raise,3 x 12-15,6,15,
+Day 3,Face Pulls (Cable),3 x 12-15,6,25,
+Day 4,Barbell Overhead Press,4 x 5-6,8,100,
+Day 4,Incline Dumbbell Press,3 x 8-10,7,60,
+Day 4,Flat Dumbbell Chest Fly,3 x 8-10,7,35,
+Day 4,Dumbbell Tricep Kickbacks,3 x 12-15,6,20,
+Day 4,Plank,3 x 30-45 sec,7,N/A,
+Day 5,Barbell Front Squat,3 x 5-6,8,135,
+Day 5,Lunges,3 x 12 (each leg),7,40,
+Day 5,Glute Bridges,3 x 12-15,7,N/A,
+Day 5,Seated Calf Raises,4 x 15-20,8,80,
+Day 5,Ab Rollouts,3 x 12-15,7,N/A,
