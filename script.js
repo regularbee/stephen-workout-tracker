@@ -105,10 +105,52 @@ Papa.parse('workout_data_stephen.csv', {
     header: true,
     dynamicTyping: true,
     complete: function(results) {
-        console.log("Parsed Data: ", results.data);  // Log the raw parsed data
-        displayWorkoutTable(results.data);  // Now process the data to display
+        const workoutData = results.data;
+
+        // Populate the exercise dropdown
+        const exerciseSelect = document.getElementById('exercise-select');
+        const exercises = [...new Set(workoutData.map(ex => ex.Exercise))];  // Get unique exercises
+
+        exercises.forEach(exercise => {
+            const option = document.createElement('option');
+            option.value = exercise;
+            option.textContent = exercise;
+            exerciseSelect.appendChild(option);
+        });
+
+        // Display workout data in the table
+        displayWorkoutTable(workoutData);
+
+        // Filter data based on the selected exercise
+        exerciseSelect.addEventListener('change', function() {
+            const selectedExercise = exerciseSelect.value;
+            const filteredData = selectedExercise ? workoutData.filter(ex => ex.Exercise === selectedExercise) : workoutData;
+            displayWorkoutTable(filteredData);
+        });
     }
 });
+
+function displayWorkoutTable(workoutData) {
+    const tableBody = document.querySelector('#workout-table tbody');
+    
+    // Clear existing rows
+    tableBody.innerHTML = '';
+
+    workoutData.forEach(exercise => {
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+            <td>${exercise.Exercise}</td>
+            <td>${exercise['Sets x Reps'] || 'N/A'}</td>
+            <td>${exercise.RPE || 'N/A'}</td>
+            <td><input type="number" value="${exercise['Weight Used (lbs)']}" class="weight-input" /></td>
+            <td><button onclick="calculateWeight(${exercise['Weight Used (lbs)']})">Calculate</button></td>
+        `;
+        
+        tableBody.appendChild(row);
+    });
+}
+
 
     createWeightChart(exampleData); // You can replace exampleData with real data
 };
